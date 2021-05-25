@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import {ButtonPanel, Display} from './components'
+import React, {useState, useEffect} from "react";
 
 function App() {
+
+  const [numberToDisplay, setNumberToDisplay] = useState()
+
+  const doMath = (param) => {
+    console.log("appjs doMath", param)
+    // fazer switch pra pegar o valor do botao
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Display number={numberToDisplay}></Display>
+      <ButtonPanel doMath={doMath}></ButtonPanel>
     </div>
   );
 }

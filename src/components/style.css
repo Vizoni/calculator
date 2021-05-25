@@ -1,0 +1,38 @@
+div.teste {
+    background-color: #858694;
+    height: 100%;
+}
+
+input.ipt {
+    background-color: #858694;
+    height: 20vh;
+    width: 100%;
+    text-align: right;
+    color: #fff;
+    font-size: 5rem;
+    font-weight: 500;
+    float: right;
+    padding: 0rem 1.2rem;
+}
+
+.dft {
+    background-color:#e0e0e0;
+    color: black;
+    font-size: 4rem;
+    height: 15vh;
+    width: 24.8%;
+    /* padding: 6px; */
+    border-width: 0px;
+    margin: 0 1px 0 0;
+}
+
+.mathSignal{
+    background-color: darkorange;
+    color: #fff
+}
+
+.zero {
+    width: 50%
+}
+
+
