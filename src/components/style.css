@@ -5,14 +5,27 @@ div.teste {
 
 input.ipt {
     background-color: #858694;
-    height: 20vh;
+    height: 15vh;
     width: 100%;
     text-align: right;
     color: #fff;
     font-size: 5rem;
-    font-weight: 500;
+    font-weight: 600;
     float: right;
     padding: 0rem 1.2rem;
+    border: none;
+}
+
+input.result {
+    background-color: #858694;
+    height: 5vh;
+    width: 100%;
+    text-align: right;
+    color: #fff;
+    font-size: 2rem;
+    float: right;
+    padding: 0rem 1.2rem;
+    border: none;
 }
 
 .dft {
