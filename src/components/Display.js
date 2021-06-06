@@ -5,8 +5,10 @@ const Display = ({newInput}) => {
 
     const [textToDisplay, setTextToDisplay] = useState(null)
     const [result, setResult] = useState(null)
-    const [finalResult, setFinalResult] = useState(null)
-    const [lastElement, setLastElement] = useState(null)
+    const [number1, setNumber1] = useState(0)
+    const [number2, setNumber2] = useState(0)
+    const [operator, setOperator] = useState(null)
+
 
     useEffect(() => {
         // atualiza o q mostrar qndo chegar um novo input
@@ -14,11 +16,11 @@ const Display = ({newInput}) => {
     }, [newInput])
 
     const formatTextToDisplay = () => {
-        console.log("Input", newInput)
         if (newInput == "AC") {
-            setTextToDisplay(null)
-            setResult(null)
-            setLastElement(null)
+            resetVariables()
+        } else if (newInput == "=") {
+            setTextToDisplay(result)
+            setResult("")
         } else if (newInput){
             if (textToDisplay == null) {
                 setTextToDisplay(`${newInput}`)
@@ -29,32 +31,45 @@ const Display = ({newInput}) => {
         }
     }
 
-    const doMath = (newInput) => {
-        // se o novo elemento for numero 
-        if (isNumber(newInput)) {
-            console.log("A - new Input", newInput)
-            // se o ultimo elemento for sinal
-            if (!isNumber(lastElement) && lastElement != null) {
-                console.log("B - lastElement", lastElement)
-                console.log("TUDO", result,lastElement,newInput)
-                console.log("FINALLL MESMO:", calculate(result,lastElement,newInput))
-                setResult(calculate(result,lastElement,newInput))
-                // setTextToDisplay(calculate(result,lastElement,newInput))
-            } else {
-                // ultimo elemento é número
-                if (lastElement == null) {
-                    setLastElement(newInput)
-                    setResult(`${newInput}`)
-                } else {
-                    setResult(`${lastElement}${newInput}`)
-                    setLastElement(`${lastElement}${newInput}`)
-                }
-            }
-        } else {
-            setLastElement(newInput)            
-            // setResult(null)
-        }
+    const resetVariables = () => {
+        setNumber1(0)
+        setNumber2(0)
+        setTextToDisplay("")
+        setResult("")
+        setOperator(null)
+    }
 
+    const doMath = (newInput) => {
+        // se o novo elemento for numero
+        if (isNumber(newInput)) {
+            if (!operator) {
+               // nao tem operator (nao tem number1): seta number1
+                setNumber1(`${number1}${newInput}`)
+           } else {
+                // já tem operator, seta number2
+                setNumber2(`${number2}${newInput}`)
+                if (!number2) {
+                    // number2 não existe pois é o primeiro numero digitado depois de um operator: seta number2
+                    setResult(calculate(number1,operator,newInput))
+                } else {
+                    // number2 já existe, vai tornar number2 uma dezena/centena/milhar: concatenat novo input
+                    setResult(calculate(number1,operator,`${number2}${newInput}`))
+                }
+           }
+        } else {
+            if (!operator) {
+                // clicou novo sinal e NAO tem operator
+                setOperator(newInput)
+            } else {
+                // clicou novo sinal e JÁ TINHA operator: number1 já está definido
+                // MOMENTO FINAL: CALCULAR E ZERAR VARIAVEIS
+                setTextToDisplay(`${calculate(number1,operator,number2)}${newInput}`)
+                setResult(null)
+                setNumber1(`${calculate(number1,operator,number2)}`)
+                setNumber2(0)
+                setOperator(newInput)
+            }
+        }
     }
 
     const calculate = (firstDigits, signal, lastDigits) => {

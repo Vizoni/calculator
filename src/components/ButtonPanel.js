@@ -11,9 +11,9 @@ const ButtonPanel = ({formatToDisplay}) => {
         <div name="component-button-panel">
         <div>
           <button className="dft" name="AC" onClick={handleClick}>AC</button>
-          <button className="dft" name="+/-" onClick={handleClick}>+/-</button>
-          <button className="dft" name="%" onClick={handleClick}>%</button>
-          <button className="dft mathSignal" name="÷" onClick={handleClick}>÷</button>
+          <button className="dft notWorking" name="+/-" onClick={handleClick} disabled>+/-</button>
+          <button className="dft notWorking" name="%" onClick={handleClick} disabled>%</button>
+          <button className="dft mathSignal" name="/" onClick={handleClick}>÷</button>
         </div>
         <div>
           <button className="dft" name="7" onClick={handleClick}>7</button>
@@ -35,7 +35,7 @@ const ButtonPanel = ({formatToDisplay}) => {
         </div>
         <div>
           <button className="dft zero" name="0" onClick={handleClick}>0</button>
-          <button className="dft" name="." onClick={handleClick}>.</button>
+          <button className="dft notWorking" name="." onClick={handleClick} disabled>.</button>
           <button className="dft orange" name="=" onClick={handleClick}>=</button>
         </div>
       </div>
