@@ -9,7 +9,6 @@ function App() {
   const [numberToDisplay, setNumberToDisplay] = useState()
 
   const formatToDisplay = (newInput) => {
-    console.log("appjs doMath", newInput, typeof(newInput)) 
     setNumberToDisplay(newInput)
   }
 

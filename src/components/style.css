@@ -40,6 +40,12 @@ input.result {
     cursor: pointer;
 }
 
+.equal {
+    background-color: #f1c695;
+    color: #fff;
+    font-weight: 700;
+}
+
 .notWorking {
     cursor: not-allowed;
 }

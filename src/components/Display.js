@@ -46,30 +46,42 @@ const Display = ({newInput}) => {
                // nao tem operator (nao tem number1): seta number1
                 setNumber1(`${number1}${newInput}`)
            } else {
-                // já tem operator, seta number2
+                // já tem operator, ou seja, number1 está finalizado: seta number2
                 setNumber2(`${number2}${newInput}`)
                 if (!number2) {
                     // number2 não existe pois é o primeiro numero digitado depois de um operator: seta number2
                     setResult(calculate(number1,operator,newInput))
                 } else {
-                    // number2 já existe, vai tornar number2 uma dezena/centena/milhar: concatenat novo input
+                    // number2 já tem algum valor, vai tornar number2 uma dezena/centena/milhar: concatena novo input
                     setResult(calculate(number1,operator,`${number2}${newInput}`))
                 }
            }
         } else {
+            // se o input for um operator e ainda não existir um operator, significa que o number1 está sendo formatado
             if (!operator) {
-                // clicou novo sinal e NAO tem operator
+                if (newInput == ".") {
+                    setNumber1(`${number1}${newInput}`)
+                    return
+                }
                 setOperator(newInput)
-            } else {
-                // clicou novo sinal e JÁ TINHA operator: number1 já está definido
-                // MOMENTO FINAL: CALCULAR E ZERAR VARIAVEIS
-                setTextToDisplay(`${calculate(number1,operator,number2)}${newInput}`)
-                setResult(null)
-                setNumber1(`${calculate(number1,operator,number2)}`)
-                setNumber2(0)
-                setOperator(newInput)
+            } else  {
+                // se o input for um operator e já existir um operator, significa que o number1 está preenchido e o number2 está sendo formatado
+                if (newInput == ".") {
+                    setNumber2(`${number2}${newInput}`)
+                    return
+                }
+                updateCalculationText(newInput)
             }
         }
+    }
+
+    // usado para atualizar os textos e resetar algumas variaveis
+    const updateCalculationText = (newInput) => {
+        setTextToDisplay(`${calculate(number1,operator,number2)}${newInput}`)
+        setResult(null)
+        setNumber1(`${calculate(number1,operator,number2)}`)
+        setNumber2(0)
+        setOperator(newInput)
     }
 
     const calculate = (firstDigits, signal, lastDigits) => {
