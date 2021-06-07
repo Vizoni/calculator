@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
 import './style.css'
 
-const ButtonPanel = ({formatToDisplay}) => {
+const ButtonPanel = ({buttonPressed}) => {
 
        const handleClick = (e) => {
-        formatToDisplay(e.target.name)
+        buttonPressed(e.target.name)
     }
 
     return (
